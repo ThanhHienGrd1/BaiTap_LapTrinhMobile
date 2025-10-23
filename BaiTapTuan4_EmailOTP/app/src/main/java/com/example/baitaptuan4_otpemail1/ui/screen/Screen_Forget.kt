@@ -1,4 +1,4 @@
-package com.example.baitaptuan4_emailotp.ui.screen
+package com.example.baitaptuan4_otpemail1.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -34,49 +34,64 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.baitaptuan4_emailotp.R
-import com.example.baitaptuan4_emailotp.ui.viewmodel.UserViewModel
-
+import com.example.baitaptuan4_otpemail1.R
+import com.example.baitaptuan4_otpemail1.ui.viewmodel.UserViewModel
 
 @Composable
-fun Screen_ForgetPassword(navController: NavController, vm: UserViewModel) {
-    var email by remember { mutableStateOf(TextFieldValue("")) }
-    val saveEmail by vm.email.collectAsState()
-    val savePassword by vm.password.collectAsState()
-    val saveOTP by vm.OTP.collectAsState()
+fun Screen_Forget(navController: NavController,vm : UserViewModel){
+    var email by remember { mutableStateOf(TextFieldValue(vm.getEmail())) }
+    val user by vm.user.collectAsState()
     var thong_bao by remember { mutableStateOf<String?>(null) }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
             .padding(15.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
 
-        ) {
         Spacer(modifier = Modifier.height(40.dp))
+
+        // 🖼️ Logo
         Image(
             painter = painterResource(R.drawable.logo),
-            contentDescription = "Logo_UTH", modifier = Modifier.size(120.dp)
-        ) // image
+            contentDescription = "Logo_UTH",
+            modifier = Modifier.size(120.dp)
+        )
 
         Spacer(modifier = Modifier.height(4.dp))
         Text(
-            text = "SmartTasks", fontSize = 24.sp, color = Color.Blue, fontWeight = FontWeight.Bold
+            text = "SmartTasks",
+            fontSize = 24.sp,
+            color = Color.Blue,
+            fontWeight = FontWeight.Bold
         )
+
         Spacer(modifier = Modifier.height(28.dp))
         Text(
-            text = "Forget Password?", fontSize = 20.sp, fontWeight = FontWeight.Medium
+            text = "Forget Password?",
+            fontSize = 20.sp,
+            fontWeight = FontWeight.Medium
         )
 
         Spacer(modifier = Modifier.height(12.dp))
         Text(
-            text = "Enter your Email, we will send you a verification code.", fontSize = 16.sp,
-            fontWeight = FontWeight.SemiBold, color = Color.LightGray, textAlign = TextAlign.Center
+            text = "Enter your Email, we will send you a verification code.",
+            fontSize = 16.sp,
+            fontWeight = FontWeight.SemiBold,
+            color = Color.LightGray,
+            textAlign = TextAlign.Center
         )
+
         Spacer(modifier = Modifier.height(24.dp))
+
+        //  nhap mail
         OutlinedTextField(
             value = email,
-            onValueChange = { thong_bao= null ; email = it },
+            onValueChange = {
+                thong_bao = null
+                email = it
+            },
             placeholder = { Text("Your Email...", color = Color.LightGray) },
             shape = RoundedCornerShape(10.dp),
             leadingIcon = {
@@ -86,13 +101,15 @@ fun Screen_ForgetPassword(navController: NavController, vm: UserViewModel) {
                     tint = Color.LightGray
                 )
             },
-            modifier = Modifier
-                .fillMaxWidth(0.9f),
+            modifier = Modifier.fillMaxWidth(0.9f),
             singleLine = true
         )
+
         Spacer(modifier = Modifier.height(8.dp))
-        if(thong_bao!=null){
-            Text (
+
+        // mess loi
+        if (thong_bao != null) {
+            Text(
                 text = thong_bao!!,
                 fontSize = 16.sp,
                 color = Color.Red
@@ -100,44 +117,36 @@ fun Screen_ForgetPassword(navController: NavController, vm: UserViewModel) {
         }
 
         Spacer(modifier = Modifier.height(16.dp))
+
+        // next
         Button(
             onClick = {
-                if(email.text.isNotEmpty()) {
+                if (email.text.isNotEmpty()) {
                     vm.setEmail(email.text)
                     navController.navigate("verify")
-                }else{
+                } else {
                     thong_bao = "Vui lòng nhập Email!"
                 }
-            }, modifier = Modifier
+            },
+            modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .height(45.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Blue
-            ),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Blue),
             shape = RoundedCornerShape(25.dp)
-        )
-        {
+        ) {
             Text("Next", fontSize = 16.sp, color = Color.White)
         }
 
-
-
-        // phan hien thi
+        // show user
         Spacer(modifier = Modifier.height(30.dp))
-        if(saveEmail.isNotEmpty()&&savePassword.isNotEmpty()){
+
+        Spacer(modifier = Modifier.height(30.dp))
+        if(user.email.isNotEmpty()&&user.password.isNotEmpty()){
             Row (
                 horizontalArrangement = Arrangement.spacedBy( 8.dp, Alignment.CenterHorizontally)
             ){
                 Text("Email:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text( "$saveEmail", fontSize = 20.sp)
-            }
-
-            Spacer(modifier = Modifier.height(8.dp))
-            Row (
-                horizontalArrangement = Arrangement.spacedBy( 8.dp, Alignment.CenterHorizontally)
-            ){
-                Text("OTP:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text( "$saveOTP", fontSize = 20.sp)
+                Text( "${user.email}", fontSize = 20.sp)
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -145,14 +154,17 @@ fun Screen_ForgetPassword(navController: NavController, vm: UserViewModel) {
                 horizontalArrangement = Arrangement.spacedBy( 8.dp, Alignment.CenterHorizontally)
             ){
                 Text("Password:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
-                Text( "$savePassword", fontSize = 20.sp)
+                Text( "${user.password}", fontSize = 20.sp)
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Row (
+                horizontalArrangement = Arrangement.spacedBy( 8.dp, Alignment.CenterHorizontally)
+            ){
+                Text("OTP:", fontSize = 20.sp, fontWeight = FontWeight.Bold)
+                Text( "${user.otp}", fontSize = 20.sp)
             }
         }
-
-
-
-
-    } // main column
-
+    }
 
 }

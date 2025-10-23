@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BaiTapTuan4_EmailOTP"
+rootProject.name = "BaiTapTuan4_OTPEmail1"
 include(":app")
  

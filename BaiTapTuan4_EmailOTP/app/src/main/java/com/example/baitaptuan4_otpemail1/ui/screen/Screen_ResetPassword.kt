@@ -1,4 +1,4 @@
-package com.example.baitaptuan4_emailotp.ui.screen
+package com.example.baitaptuan4_otpemail1.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -37,12 +37,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.baitaptuan4_emailotp.R
-import com.example.baitaptuan4_emailotp.ui.viewmodel.UserViewModel
-
+import com.example.baitaptuan4_otpemail1.R
+import com.example.baitaptuan4_otpemail1.ui.viewmodel.UserViewModel
 
 @Composable
-fun Screen_ResetPassword(navController: NavController, vm: UserViewModel) {
+fun Screen_ResetPassword(navController: NavController, vm : UserViewModel){
+
     var password by remember { mutableStateOf(TextFieldValue("")) }
     var confirmPassword by remember { mutableStateOf(TextFieldValue("")) }
     var icon_passwordcheck by remember { mutableStateOf(false) }
@@ -161,6 +161,7 @@ fun Screen_ResetPassword(navController: NavController, vm: UserViewModel) {
         }
 
         Spacer(modifier = Modifier.height(28.dp))
+
         Button(
             onClick = {
                 if (password.text == confirmPassword.text) {
@@ -183,6 +184,8 @@ fun Screen_ResetPassword(navController: NavController, vm: UserViewModel) {
         }
 
     } // main column
+
+
 
 
 }

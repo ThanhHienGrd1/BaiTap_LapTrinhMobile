@@ -1,4 +1,4 @@
-package com.example.baitaptuan4_emailotp
+package com.example.baitaptuan4_otpemail1
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,18 +11,22 @@ import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.baitaptuan4_emailotp.ui.screen.Navigation
-import com.example.baitaptuan4_emailotp.ui.theme.BaiTapTuan4_EmailOTPTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.baitaptuan4_otpemail1.ui.navigation.Navigation
+import com.example.baitaptuan4_otpemail1.ui.theme.BaiTapTuan4_OTPEmail1Theme
+import com.example.baitaptuan4_otpemail1.ui.viewmodel.UserViewModel
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            BaiTapTuan4_EmailOTPTheme {
+            BaiTapTuan4_OTPEmail1Theme {
                 Scaffold(modifier = Modifier.windowInsetsPadding(WindowInsets.safeDrawing)) { innerPadding ->
                     Column(modifier = Modifier.padding(innerPadding)) {
-                        Navigation()
+                        val vm: UserViewModel = viewModel()
+                        Navigation(vm)
+
                     }
                 }
             }

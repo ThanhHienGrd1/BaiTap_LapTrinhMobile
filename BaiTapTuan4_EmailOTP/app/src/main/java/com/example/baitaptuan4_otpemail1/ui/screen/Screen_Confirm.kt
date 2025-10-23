@@ -1,4 +1,4 @@
-package com.example.baitaptuan4_emailotp.ui.screen
+package com.example.baitaptuan4_otpemail1.ui.screen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -30,19 +30,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.baitaptuan4_emailotp.R
-import com.example.baitaptuan4_emailotp.ui.viewmodel.UserViewModel
+import com.example.baitaptuan4_otpemail1.R
+import com.example.baitaptuan4_otpemail1.ui.viewmodel.UserViewModel
 
 @Composable
-
-fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
-    val Email by vm.email.collectAsState()
-    val Password by vm.password.collectAsState()
-    val OTP by vm.OTP.collectAsState()
+fun Screen_Confirm(navController: NavController, vm: UserViewModel){
+    val user by vm.user.collectAsState()
 
     Column(
         modifier = Modifier
@@ -62,7 +58,7 @@ fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
                 contentDescription = "Icon",
                 modifier = Modifier
                     .size(25.dp)
-                .clickable { navController.popBackStack() }
+                    .clickable { navController.popBackStack() }
             )
         }
         Spacer(modifier = Modifier.height(16.dp))
@@ -103,7 +99,7 @@ fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
                     .size(35.dp)
 
             )
-            Text("$Email", fontSize = 16.sp)
+            Text("${user.email}", fontSize = 16.sp)
 
         }
 
@@ -123,7 +119,7 @@ fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
                     .size(35.dp)
 
             )
-            Text("$OTP", fontSize = 16.sp)
+            Text("${user.otp}", fontSize = 16.sp)
 
         }
 
@@ -144,7 +140,7 @@ fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
                     .size(35.dp)
 
             )
-            Text("$Password", fontSize = 16.sp)
+            Text("${user.password}", fontSize = 16.sp)
 
         }
 
@@ -169,6 +165,4 @@ fun Screen_Confirm(navController: NavController, vm: UserViewModel) {
 
     } // main column
 
-
 }
-

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.baitaptuan4_emailotp"
+    namespace = "com.example.baitaptuan4_otpemail1"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.baitaptuan4_emailotp"
+        applicationId = "com.example.baitaptuan4_otpemail1"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

@@ -1,4 +1,4 @@
-package com.example.baitaptuan4_emailotp.ui.theme
+package com.example.baitaptuan4_otpemail1.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

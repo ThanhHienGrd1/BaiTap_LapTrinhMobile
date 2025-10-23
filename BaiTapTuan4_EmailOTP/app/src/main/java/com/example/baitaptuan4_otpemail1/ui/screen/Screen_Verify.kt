@@ -1,6 +1,5 @@
-package com.example.baitaptuan4_emailotp.ui.screen
+package com.example.baitaptuan4_otpemail1.ui.screen
 
-import android.R.attr.singleLine
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -42,12 +41,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.example.baitaptuan4_emailotp.R
-import com.example.baitaptuan4_emailotp.ui.viewmodel.UserViewModel
+import com.example.baitaptuan4_otpemail1.R
+import com.example.baitaptuan4_otpemail1.ui.viewmodel.UserViewModel
 
 @Composable
-fun VerifyOTP(navController: NavController, vm: UserViewModel) {
-    val OTP = "12345"
+fun Screen_Verify(navController: NavController,vm : UserViewModel){
+    val OTP by remember { mutableStateOf(vm.getOTP()) }
     val otpList_text = remember { List(5) { mutableStateOf(TextFieldValue("")) } }
     val focusReques = List(5) { FocusRequester() }
     val focusManager = LocalFocusManager.current
@@ -155,8 +154,9 @@ fun VerifyOTP(navController: NavController, vm: UserViewModel) {
         Button(
             onClick = {
                 val OTP_input = otpList_text.joinToString("") { it.value.text }
-                if (OTP == OTP_input) {
-                    vm.setOTP(OTP)
+                if (OTP_input == OTP) {
+
+
                     navController.navigate("reset")
                 } else {
                     thong_bao = "Sai mã OTP !"
